@@ -1,6 +1,18 @@
-# demo_app_arc
+# Demo App Clean Architecture (Flutter MVVM)
 
-A new Flutter project.
+Este mini demo muestra una estructura alineada con la guía de arquitectura limpia para Flutter basada en MVVM.
+
+## Capas
+
+- **UI layer (`lib/ui/...`)**: Widgets y ViewModels. Los ViewModels (ChangeNotifier) exponen estado y comandos. No contienen lógica de infraestructura.
+- **Domain layer (`lib/domain/...`)**: Modelos de dominio y casos de uso. Pura lógica de negocio; no depende de Flutter ni de detalles externos.
+- **Data layer (`lib/data/...`)**: Servicios y Repositorios. Los servicios interactúan con fuentes externas (APIs, DB, memoria). Los repositorios traducen DTOs a modelos de dominio y son el punto de entrada para la capa domain.
+
+## Flujo
+```
+[UI] -> solicita -> [UseCase] -> delega -> [Repository] -> llama -> [Service]
+[Service] -> devuelve DTO -> [Repository] -> mapea -> Domain Model -> [UseCase] -> [ViewModel] -> Notifica UI
+```
 
 ## Getting Started
 
